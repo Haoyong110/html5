@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+ <head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../bootstrap/js/jquery-1.7.1.min.js"></script>
+ </head>
+ <body>
+	<h2>H2 title</h2>
+	<button>Append</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button>Append function</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<button>Prepend</button><br />
+	<button>Append h2</button>&nbsp;&nbsp;&nbsp;&nbsp;
+	<br />
+	<div id="output">
+		[original content]
+	</div>
+	<script language="javascript">
+		$(function() {
+			$("button:first").click(function() {
+				var str = "< append content >";
+				$("#output").append(str);
+			});
+			$("button").eq(2).click(function() {
+				var str = "[ prepend content ]";
+				$("#output").prepend(str);
+			});
+
+			/*$("button:eq(1)").click(function() {
+				$("#output").append(function() {
+					alert($(this).text());
+					return $(this).text();
+				});
+			});
+			*/
+			
+			/*
+				添加页面内存在的dom节点会是原来的节点移动（删除，天交到新的地方）
+			*/
+			$("button").eq(3).click(function() {
+				$("#output").append($("h2"));
+			});
+
+			$("<h3>title 3</h3>").prependTo("div:first");
+			$("h2").appendTo("div:first");
+		});
+	</script>
+ </body>
+</html>
