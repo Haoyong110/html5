@@ -33,5 +33,19 @@
 			console.log("div:eq(1) parentsUntil(body).length -- :" + pasUntil);
 		});
 	</script>
+	<br/><hr /><br />
+	<section id="next">
+		<span>span 1  </span>
+		<span class="s1">span s1  </span>
+		<span>span 3  </span>
+		<span>span 4 </span>
+		
+	<section/>
+	<script language="javascript">
+		$(function() {
+			console.log("next" + $("#next .s1").next().text());	
+			console.log("nextAll" + $("#next .s1").nextAll().text());
+		});
+	</script>
  </body>
 </html>
