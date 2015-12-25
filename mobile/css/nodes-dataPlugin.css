@@ -1,5 +1,4 @@
 table {
-	cell
 	font-size:12px;
 	cursor:default;
 }
@@ -31,8 +30,8 @@ tr {
 }
 
 td {
-	height:2.5em;
-	width:3.9em;
+	height:2em;
+	width:3em;
 	text-align:center;
 }
 

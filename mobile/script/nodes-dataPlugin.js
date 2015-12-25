@@ -62,10 +62,10 @@ function days(startMonthDay) {
 
 
 /**
-
+main 函数
 */
-$(function() {
-	init(new Date());
+function main(date,flag) {
+	init(date);
 	$("table").append("<tr><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th>" + 
 		"<th>Fri</th><th>Sat</th><th>Sun</th></tr>");
 	for(var i = 0; i < 6; i++) {
@@ -77,8 +77,10 @@ $(function() {
 	$("tr:odd").addClass("odd");
 
 
-	var to  = $("td").eq(startMonthDay + currentDay - 2);
-	to.addClass("today").attr({title:"今天是" + (currentMonth + 1) + "月" + to.text() + "号"});
+	if(flag) {
+		var to  = $("td").eq(startMonthDay + currentDay - 2);
+		to.addClass("today").attr({title:"今天是" + (currentMonth + 1) + "月" + to.text() + "号"});
+	}
 
 	/*不是本月的日期*/
 	$("td").slice(0,startMonthDay -1).css({
@@ -89,6 +91,60 @@ $(function() {
 	});
 
 	//$("tr").children().has();
+
+	$("div#yearMonth").text(currentYear + "年" + (1 + currentMonth) + "月").width($("table").width()).css({"text-align":"center","background":"#aaa"});
+
+	var pre = $("<span><</span>");
+	var after = $("<span>></span>");
+	$("div#yearMonth").append(after);
+	$("div#yearMonth").prepend(pre);
+	
+	$("div#yearMonth span").css({
+		display:"block",
+		color:"#fff",
+		background:"#000",
+		padding:"0 10px",
+		cursor:"pointer"
+	});
+	$("div#yearMonth span").eq(0).css({
+		float:"left"
+	});
+	$("div#yearMonth span").eq(1).css({
+		float:"right"
+	});
+	
+	$("div#yearMonth span").eq(0).bind("click",function() {
+		currentMonth--;
+		if(currentMonth < 0) {
+			currentMonth = 11;
+			currentYear--;
+		}
+		var dat = new Date(currentYear,currentMonth,1);
+		$("div#yearMonth,table").empty();
+		main(dat,0);
+
+	});
+
+	$("div#yearMonth span").eq(1).bind("click",function() {
+		currentMonth++;
+		if(currentMonth > 11) {
+			currentMonth = 0;
+			currentYear++;
+		}
+		var dat = new Date(currentYear,currentMonth,1);
+		$("div#yearMonth,table").empty();
+		main(dat,0);
+
+	});
+	
+}
+
+
+$(function() {
+	main(new Date(),1);
+	
+	//test
+	console.log("height: " + $("table").height() + " width:" + $("table").width());
 
 });
 
