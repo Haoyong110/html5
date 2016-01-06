@@ -1,0 +1,25 @@
+<! doctype html>
+<html>
+<head>
+	<title>ajax1</title>
+	<script src="../bootstrap/js/jquery-1.7.1.min.js"></script>
+</head>
+
+<body>
+	<button>button</button> &nbsp;&nbsp;<span id="button1span"></span>
+	<script language="javascript">
+		$(function() {
+			var xhr = new XMLHttpRequest();
+			$("button:first").click(function() {
+				xhr.open("get","file.log",true);
+				xhr.send(null);
+				xhr.onreadystatechange = function() {
+					if(xhr.readyState == 4) {
+						$("button1span").html(xhr.responseText);
+					}
+				}
+			});
+		});
+	</script>
+</body>
+</html>
